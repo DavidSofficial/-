@@ -1,0 +1,38 @@
+import telebot
+import random
+
+from telebot import types
+
+bot = telebot.TeleBot('5446468385:AAFz0YVr6PsCq3yr4aajttVUEWS50kSWu-s') # Сюда апи ключ
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    global keyboard, btn1
+    keyboard = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton(text="Новый пароль", callback_data="call1")
+    keyboard.add(btn1)
+    usr = message.from_user.username
+    bot.send_message(message.chat.id, f"Добро пожаловать *{usr}* \nСгенерируйте себе надежный пароль длиной 12 символов.", parse_mode='Markdown', reply_markup=keyboard)
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    global keyboard
+    list1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '-', '_', '#', '%', '&', '?', '!']
+    a = random.randint(0, 67)
+    b = random.randint(0, 67)
+    c = random.randint(0, 67)
+    d = random.randint(0, 67)
+    e = random.randint(0, 67)
+    f = random.randint(0, 67)
+    h = random.randint(0, 67)
+    i = random.randint(0, 67)
+    j = random.randint(0, 67)
+    k = random.randint(0, 67)
+    l = random.randint(0, 67)
+    m = random.randint(0, 67)
+    if call.message:
+        if call.data == "call1":
+            global keyboard, btn1
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'{list1[a]}{list1[b]}{list1[c]}{list1[d]}{list1[e]}{list1[f]}{list1[h]}{list1[i]}{list1[j]}{list1[k]}{list1[l]}{list1[m]}', parse_mode='Markdown', reply_markup=keyboard)
+
+bot.infinity_polling()
