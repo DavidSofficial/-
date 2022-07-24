@@ -3,7 +3,7 @@ import random
 
 from telebot import types
 
-bot = telebot.TeleBot('5446468385:AAFz0YVr6PsCq3yr4aajttVUEWS50kSWu-s') # Сюда апи ключ
+bot = telebot.TeleBot('') # Сюда апи ключ
 
 @bot.message_handler(commands=['start'])
 def start(message):
